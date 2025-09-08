@@ -15,15 +15,14 @@ import org.jboss.logging.Logger;
 
 @ApplicationScoped
 public class AccountTypeProcessor {
-
-    private static final Logger LOGGER = Logger.getLogger(AccountTypeProcessor.class.getName());
+    private static final Logger LOGGER = Logger.getLogger(AccountTypeProcessor.class);
 
     @Inject
     Mutiny.SessionFactory session;
 
     @Incoming("new-bank-accounts-in")
     @ActivateRequestContext
-    public Uni<Void> processNewBankAccountEvents(BankAccountWasCreated event) {
+    public Uni<Void> processNewBankAccountEvents(BankAccountWasCreated event){
         String assignedAccountType = calculateAccountType(event.balance);
 
         logEvent(event,  assignedAccountType);
@@ -36,21 +35,19 @@ public class AccountTypeProcessor {
                                 entity -> entity.type = assignedAccountType)
                         .replaceWithVoid()
         );
-
-
     }
 
+
     public String calculateAccountType(Long balance) {
-        return balance >= 100000 ? "premium" : "regular";
+        return balance >=100000 ? "premium" : "regular";
     }
 
     private void logEvent(BankAccountWasCreated event, String assignedType) {
         LOGGER.infov(
-                "Processing BankAccountWasCreated - ID: {0} Balance: {1} Type: {2}",
+                "Processing BankAccountWasCreated.java - ID: {0} Balance: {1} Type: {2}",
                 event.id,
                 event.balance,
                 assignedType
         );
     }
-
 }

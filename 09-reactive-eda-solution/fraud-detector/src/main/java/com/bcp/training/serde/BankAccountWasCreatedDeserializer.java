@@ -1,6 +1,7 @@
 package com.bcp.training.serde;
 
 
+
 import com.bcp.training.event.BankAccountWasCreated;
 import io.quarkus.kafka.client.serialization.ObjectMapperDeserializer;
 

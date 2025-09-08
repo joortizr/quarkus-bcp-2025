@@ -5,10 +5,7 @@ import com.bcp.training.event.BankAccountWasCreated;
 import com.bcp.training.event.HighRiskAccountWasDetected;
 import com.bcp.training.event.LowRiskAccountWasDetected;
 import jakarta.enterprise.context.ApplicationScoped;
-import org.eclipse.microprofile.reactive.messaging.Channel;
-import org.eclipse.microprofile.reactive.messaging.Emitter;
-import org.eclipse.microprofile.reactive.messaging.Incoming;
-import org.eclipse.microprofile.reactive.messaging.Message;
+import org.eclipse.microprofile.reactive.messaging.*;
 import org.jboss.logging.Logger;
 
 import java.util.concurrent.CompletionStage;

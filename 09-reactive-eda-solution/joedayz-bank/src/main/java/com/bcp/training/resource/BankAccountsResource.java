@@ -5,6 +5,7 @@ import com.bcp.training.model.BankAccount;
 import io.quarkus.hibernate.reactive.panache.Panache;
 import io.quarkus.panache.common.Sort;
 import io.smallrye.mutiny.Uni;
+import jakarta.validation.Valid;
 import jakarta.ws.rs.*;
 import jakarta.ws.rs.core.MediaType;
 import jakarta.ws.rs.core.Response;
@@ -29,7 +30,25 @@ public class BankAccountsResource {
     }
 
     @POST
-    public Uni<Response> create(BankAccount bankAccount) {
+    public Uni<Response> create(@Valid BankAccount bankAccount) {
+        // Validar que el balance no sea null
+        if (bankAccount.balance == null) {
+            return Uni.createFrom().item(
+                Response.status(Response.Status.BAD_REQUEST)
+                    .entity("{\"error\": \"El balance no puede ser null\"}")
+                    .build()
+            );
+        }
+
+        // Validar que el balance sea positivo
+        if (bankAccount.balance <= 0) {
+            return Uni.createFrom().item(
+                Response.status(Response.Status.BAD_REQUEST)
+                    .entity("{\"error\": \"El balance debe ser un número positivo\"}")
+                    .build()
+            );
+        }
+
         return Panache
                 .<BankAccount>withTransaction(bankAccount::persist)
                 .onItem()
@@ -47,4 +66,3 @@ public class BankAccountsResource {
         emitter.send(new BankAccountWasCreated(id, balance));
     }
 }
-

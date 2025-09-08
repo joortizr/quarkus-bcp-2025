@@ -26,8 +26,21 @@
             _refreshPageData();
 
             $scope.create = function () {
+                // Validar que el balance no esté vacío
+                if (!$scope.form.balance || $scope.form.balance === "" || $scope.form.balance === null) {
+                    alert("Debe especificar un balance inicial válido");
+                    return;
+                }
+
+                // Convertir a número y validar que sea positivo
+                var balance = parseFloat($scope.form.balance);
+                if (isNaN(balance) || balance <= 0) {
+                    alert("El balance debe ser un número positivo");
+                    return;
+                }
+
                 var data = {};
-                data.balance = $scope.form.balance;
+                data.balance = balance;
 
                 $http({
                     method: 'POST',
