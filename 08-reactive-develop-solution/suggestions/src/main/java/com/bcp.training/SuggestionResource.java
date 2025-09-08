@@ -26,4 +26,10 @@ public class SuggestionResource {
     public Uni<Long> deleteAll() {
         return Suggestion.deleteAll();
     }
+
+    @GET
+    public Multi<Suggestion> list(){
+        return Suggestion.<Suggestion>listAll()
+                .onItem().transformToMulti(list -> Multi.createFrom().iterable(list));
+    }
 }
