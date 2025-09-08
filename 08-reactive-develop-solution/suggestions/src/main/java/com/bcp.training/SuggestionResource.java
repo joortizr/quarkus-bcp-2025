@@ -1,6 +1,7 @@
 package com.bcp.training;
 
 import io.quarkus.hibernate.reactive.panache.common.WithTransaction;
+import io.smallrye.mutiny.Multi;
 import io.smallrye.mutiny.Uni;
 import jakarta.ws.rs.*;
 import jakarta.ws.rs.core.MediaType;
@@ -30,6 +31,7 @@ public class SuggestionResource {
     @GET
     public Multi<Suggestion> list(){
         return Suggestion.<Suggestion>listAll()
-                .onItem().transformToMulti(list -> Multi.createFrom().iterable(list));
+                .onItem().transformToMulti(list ->
+                        Multi.createFrom().iterable(list));
     }
 }
