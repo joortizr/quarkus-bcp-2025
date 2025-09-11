@@ -15,11 +15,20 @@
   },
   "users": [
     {
-      "username": "alice",
+      "username": "user",
       "enabled": true,
       "emailVerified": true,
       "credentials": [
-        { "type": "password", "value": "alice", "temporary": false }
+        { "type": "password", "value": "redhat", "temporary": false }
+      ],
+      "realmRoles": ["read"]
+    },
+    {
+      "username": "superuser",
+      "enabled": true,
+      "emailVerified": true,
+      "credentials": [
+        { "type": "password", "value": "redhat", "temporary": false }
       ],
       "realmRoles": ["read", "modify", "delete"]
     }

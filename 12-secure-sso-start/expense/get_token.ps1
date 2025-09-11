@@ -13,7 +13,7 @@ param(
 $OIDC_SERVER_URL = "http://localhost:8888"
 $REALM = "quarkus"
 $CLIENT_ID = "backend-service"
-$CLIENT_SECRET = "dk9dYtW7usj1Nma1lo6jXmcN7we6qmeH"
+$CLIENT_SECRET = "secret"
 
 Write-Host "Authenticating with OIDC server..." -ForegroundColor Green
 Write-Host "Server: $OIDC_SERVER_URL" -ForegroundColor Yellow
