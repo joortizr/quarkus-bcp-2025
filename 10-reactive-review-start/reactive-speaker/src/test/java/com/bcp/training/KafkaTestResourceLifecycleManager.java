@@ -30,3 +30,4 @@ public class KafkaTestResourceLifecycleManager implements QuarkusTestResourceLif
     }
 }
 
+
