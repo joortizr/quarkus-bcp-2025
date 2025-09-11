@@ -36,11 +36,13 @@ public class SpeakerResource {
                                             newSpeaker.email
                                     )
                             );
-                            return Response.created(URI.create("/speakers/" + inserted.id)).build();
+
+                            return Response.created(
+                                    URI.create("/speakers/" + inserted.id)
+                            ).build();
                         }
                 );
     }
-
 
     @GET
     @Path("/{id}")
@@ -49,7 +51,7 @@ public class SpeakerResource {
     }
 
     @GET
-    public Uni<List<Speaker>> listAll() {
+    public Uni<List<Speaker>> listAll () {
         return Speaker.listAll();
     }
 }

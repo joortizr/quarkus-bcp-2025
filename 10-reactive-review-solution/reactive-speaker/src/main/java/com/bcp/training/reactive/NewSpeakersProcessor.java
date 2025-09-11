@@ -18,25 +18,25 @@ public class NewSpeakersProcessor {
     private static final Logger LOGGER = Logger.getLogger(NewSpeakersProcessor.class);
 
     @Channel("employees-out")
-     Emitter<EmployeeSignedUp> employeeEmitter;
+    Emitter<EmployeeSignedUp> employeeEmitter;
 
     @Channel("upstream-members-out")
     Emitter<UpstreamMemberSignedUp> upstreamEmitter;
 
     @Incoming("new-speakers-in")
-    public CompletionStage<Void> sendEventNotifications(Message<SpeakerWasCreated> message) {
-
+    public CompletionStage<Void>
+            sendEventNotifications(Message<SpeakerWasCreated> message){
         SpeakerWasCreated event = message.getPayload();
-
         logProcessEvent(event.id);
 
-        if(event.affiliation == Affiliation.RED_HAT){
-            logEmitEvent("EmployeesSignedUp", event.affiliation);
-            employeeEmitter.send(new EmployeeSignedUp(event.id, event.fullName,  event.email));
-
-        }else if(event.affiliation == Affiliation.GNOME_FOUNDATION) {
+        if(event.affiliation==Affiliation.RED_HAT){
+            logEmitEvent("EmployeeSignedUp", event.affiliation);
+            employeeEmitter.send(
+                    new EmployeeSignedUp(event.id, event.fullName, event.email));
+        }else if(event.affiliation ==Affiliation.GNOME_FOUNDATION){
             logEmitEvent("UpstreamMemberSignedUp", event.affiliation);
-            upstreamEmitter.send(new UpstreamMemberSignedUp(event.id, event.fullName, event.email));
+            upstreamEmitter.send(new
+                    UpstreamMemberSignedUp(event.id, event.fullName, event.email));
         }
 
         return message.ack();
@@ -58,3 +58,4 @@ public class NewSpeakersProcessor {
         );
     }
 }
+
