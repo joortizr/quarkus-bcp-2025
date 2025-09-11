@@ -15,3 +15,11 @@ Invoke-RestMethod -Uri http://localhost:8080/expense -Headers @{ Authorization =
 
 $UUID = "3f1817f2-3dcf-472f-a8b2-77bfe25e79d1"
 Invoke-RestMethod -Uri "http://localhost:8080/expense/$uuid" -Method Delete -Headers @{ Authorization = "Bearer $env:TOKEN" }
+
+
+Users
+=====
+.\get_token.ps1 user redhat
+
+.\get_token.ps1 superuser redhat    
+
