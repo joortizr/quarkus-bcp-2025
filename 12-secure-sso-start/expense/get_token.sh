@@ -8,7 +8,7 @@ if [ $# -lt 2 ]; then
   exit 1
 fi
 
-SERVER="https://localhost:9999/realms/quarkus/protocol/openid-connect/token"
+SERVER="http://localhost:8888/realms/quarkus/protocol/openid-connect/token"
 SECRET_ID="backend-service"
 SECRET_PW="secret"
 USERNAME="$1"
