@@ -16,6 +16,8 @@ import java.util.Set;
 public class ClientResource {
 
 
+    @Inject
+    @RestClient
     ExpenseServiceClient service;
 
     @GET

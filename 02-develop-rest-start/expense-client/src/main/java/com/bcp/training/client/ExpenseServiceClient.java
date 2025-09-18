@@ -9,7 +9,8 @@ import org.eclipse.microprofile.rest.client.inject.RegisterRestClient;
 import java.util.Set;
 
 
-
+@Path("/expenses")
+@RegisterRestClient
 public interface ExpenseServiceClient {
 
     @GET
